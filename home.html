@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반려일지</title>
+    <link rel="stylesheet" href="css/cs1.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const slideImg = document.querySelectorAll('#layout #slide img');
+            const radio = document.querySelectorAll("#radio button");
+
+            let t = 0;
+
+            // 슬라이드
+            const slide1 = () => {
+                slideImg.forEach((i, j) => {
+                    i.style.opacity = (j === t) ? 1 : 0;
+                });
+
+                const act = document.querySelectorAll("#radio .act");
+                act.forEach(i => {
+                    i.classList.remove("act");
+                });
+                radio[t].classList.add("act");
+            };
+
+            // 이전
+            const prevSlide = () => {
+                t = (t === 0) ? slideImg.length - 1 : t - 1;
+                slide1();
+            };
+
+            // 다음
+            const nextSlide = () => {
+                t = (t === slideImg.length - 1) ? 0 : t + 1;
+                slide1();
+            };
+
+            setInterval(nextSlide, 2500); // 3초마다 자동으로 슬라이드
+
+            document.querySelector(".prev").addEventListener("click", prevSlide);
+            document.querySelector(".next").addEventListener("click", nextSlide);
+
+            slide1();
+        });
+    </script>
+</head>
+
+<body id="w1">
+    <div id="layout">
+        <h1>이벤트</h1>
+        <div id="slide">
+            <img src="images/1724134922668_3140.jpg" alt="image1">
+            <img src="images/1724134922668_3141.jpg" alt="image2">
+            <img src="images/1724134922668_3142.jpg" alt="image3">
+
+            <button class="slide-button prev">&lt;</button>
+            <button class="slide-button next">&gt;</button>
+
+            <div id="radio">
+                <button type="button" class="act"></button>
+                <button type="button"></button>
+                <button type="button"></button>
+            </div>
+        </div>
+
+        <section class="bb">
+            <h2>이용약관</h2>
+            <input type="checkbox" style="width: 20px; height: 20px; margin-left: 5px;">
+            <h2>이용약관</h2>
+            <input type="checkbox" style="width: 20px; height: 20px; margin-left: 5px;">
+        </section>
+
+        <section class="cc">
+            <p>앱정보</p>
+        </section>
+    </div>
+</body>
+
+</html>
